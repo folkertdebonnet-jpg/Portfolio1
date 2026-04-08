@@ -1,0 +1,458 @@
+/* works.css — Works page: sidebar, masonry grid, cards, modal */
+
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
+
+.works-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
+
+.works-sidebar {
+    width: 20%;
+    flex-shrink: 0;
+    padding: 120px 40px 40px 80px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    background: rgba(17, 17, 17, 0.4);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.works-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 40px;
+    position: sticky;
+    top: 120px;
+}
+
+.sidebar-link {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.sidebar-link::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    color: #ffffff;
+}
+
+.sidebar-link.active::before {
+    opacity: 1;
+}
+
+/* ─── Main Content ───────────────────────────────────────────────────────── */
+
+.works-main {
+    width: 80%;
+    padding: 120px 80px 40px 24px;
+    box-sizing: border-box;
+}
+
+/* ─── Section ────────────────────────────────────────────────────────────── */
+
+.works-section {
+    margin-bottom: 220px; /* Increased for better segment distinction */
+    scroll-margin-top: 100px;
+    min-height: 50vh;
+}
+
+.works-section-title {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+    margin: 0 0 48px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Added subtle divider */
+}
+
+/* ─── Masonry Grid ───────────────────────────────────────────────────────── */
+
+.works-grid {
+    column-count: 4; /* Dynamic dense stacking */
+    column-gap: 24px;
+}
+
+.work-card {
+    break-inside: avoid;
+    display: block;
+    cursor: pointer;
+    margin-bottom: 24px;
+    position: relative;
+    animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardReveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.work-card:nth-child(1) { animation-delay: 0.05s; }
+.work-card:nth-child(2) { animation-delay: 0.1s; }
+.work-card:nth-child(3) { animation-delay: 0.15s; }
+
+/* ─── Card Media ─────────────────────────────────────────────────────────── */
+
+/* Masonry height variants for organic staggered look */
+.work-card-media {
+    width: 100%;
+    min-height: auto; /* Match image size precisely */
+    background-color: #161616;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.work-card-media--standard { aspect-ratio: 4 / 3; }
+.work-card-media--tall     { aspect-ratio: 3 / 4; }
+.work-card-media--wide     { aspect-ratio: 16 / 9; }
+.work-card-media--short    { aspect-ratio: 4 / 2; }
+
+.work-card:hover .work-card-media {
+    transform: scale(0.98);
+}
+
+.work-card-placeholder {
+    color: rgba(255, 255, 255, 0.12);
+    width: 48px;
+    height: 48px;
+    transition: color 0.2s ease;
+}
+
+.work-card-placeholder svg {
+    width: 100%;
+    height: 100%;
+}
+
+.work-card:hover .work-card-placeholder {
+    color: rgba(255, 255, 255, 0.22);
+}
+
+/* Hover overlay */
+.work-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    transition: background 0.3s ease;
+}
+
+.work-card-media img {
+    width: 100%;
+    height: auto; /* Proportional natural height */
+    object-fit: cover; /* Crop only when aspect-ratio class is explicit */
+    display: block;
+    animation: thumbFadeIn 0.5s ease both;
+}
+
+@keyframes thumbFadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.work-card-tag {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 10px;
+    border-radius: 100px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.work-card:hover .work-card-tag {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─── Card Info ──────────────────────────────────────────────────────────── */
+
+.work-card-info {
+    padding: 12px 4px 4px;
+}
+
+.work-card-title {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    position: relative;
+    padding-left: 14px;
+}
+
+.work-card-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 1; /* Match 'active' style */
+}
+
+.work-card-meta {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+/* ─── Modal ──────────────────────────────────────────────────────────────── */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(8px);
+}
+
+.modal-overlay:not([hidden]) {
+    opacity: 1;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-bubble {
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    width: min(1000px, 92vw);
+    max-height: 85vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+}
+
+.modal-overlay:not([hidden]) .modal-bubble {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.modal-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-left {
+    flex: 1.2;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.modal-media {
+    width: 100%;
+    height: 100%;
+    max-height: 85vh; /* Increased to allow full PDF scroll */
+    display: flex;
+    flex-direction: column; /* For vertical stacking of PDF pages */
+    align-items: center;
+    justify-content: flex-start; /* Start from top for scrollable content */
+    overflow-y: auto; /* Enable scrolling for multiple pages */
+    padding: 0;
+}
+
+/* Custom Scrollbar - Moved to global homepage.css */
+
+.modal-media img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.modal-media video {
+    width: 100%;
+    max-height: 60vh;
+    border-radius: 8px;
+    outline: none;
+}
+
+.modal-media iframe {
+    width: 100%;
+    height: 60vh;
+    border: none;
+    border-radius: 8px;
+}
+
+.modal-media-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.15);
+    font-family: Saans, Arial, sans-serif;
+    font-size: 13px;
+}
+
+.modal-media-placeholder svg {
+    width: 48px;
+    height: 48px;
+}
+
+.modal-right {
+    flex: 0 0 280px;
+    padding: 48px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+}
+
+.modal-tag {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+    margin: 0;
+}
+
+.modal-title {
+    font-family: 'Playfair Display', Didot, 'Bodoni MT', serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin: 0;
+}
+
+.modal-desc {
+    font-family: Saans, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .works-grid { column-count: 2; }
+    .works-sidebar { width: 20%; padding-left: 40px; }
+    .works-main { width: 80%; padding: 120px 40px 40px 20px; }
+}
+
+@media (max-width: 768px) {
+    .works-layout { flex-direction: column; }
+    .works-sidebar { 
+        width: 100%; 
+        height: auto; 
+        position: sticky; 
+        top: 0;
+        padding: 20px 24px 16px;
+        background: #111;
+        z-index: 100;
+    }
+    .works-sidebar-nav { 
+        flex-direction: row; 
+        gap: 24px; 
+        justify-content: center;
+    }
+    .sidebar-link {
+        font-size: 16px;
+        padding: 8px 0;
+    }
+    .sidebar-link::before { display: none; }
+    .works-main { width: 100%; padding: 24px 24px 40px; }
+    .works-grid { column-count: 1; }
+
+    .modal-bubble { flex-direction: column; max-height: 92vh; }
+    .modal-left { padding: 24px; min-height: 200px; flex: none; }
+    .modal-right { flex: none; padding: 24px; }
+}

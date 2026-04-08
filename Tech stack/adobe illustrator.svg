@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Laag_1" data-name="Laag 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 939.68 985.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f59918;
+      }
+
+      .cls-2 {
+        fill: #280d0e;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-2" points="62.24 269.16 62.24 711.3 445.14 932.37 828.05 711.3 828.05 269.16 445.14 48.09 62.24 269.16"/>
+  <g>
+    <path class="cls-1" d="M396.49,348.22h-82.99l-104.9,303.75h76.41l19.82-70.87h100.34l28.49,70.87h78.04l-115.2-303.75ZM322.55,522.44l32.35-112.67,36.12,112.67h-68.46Z"/>
+    <rect class="cls-1" x="531.05" y="420.96" width="69.65" height="231.01"/>
+    <circle class="cls-1" cx="565.87" cy="363.32" r="34.83" transform="translate(-94.63 237.06) rotate(-21.88)"/>
+  </g>
+</svg>
